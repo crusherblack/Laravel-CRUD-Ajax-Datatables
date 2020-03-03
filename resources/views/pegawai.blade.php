@@ -17,24 +17,22 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">BELAJAR CRUD AJAX MENGGUNAKAN YAJDRA DATATABLES BY TAHU CODING</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
-            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-         
-        </div>
-    </nav>
-    <br>
+    <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
+        <h5 class="my-0 mr-md-auto font-weight-normal">LARAVEL AJAX CRUD YAJRA DATATABLE </h5>
+        <nav class="my-2 my-md-0 mr-md-3">
+            <a class="p-2 text-dark" href="#">Laravel</a>
+            <a class="p-2 text-dark" href="#">Codeigniter</a>
+            <a class="p-2 text-dark" href="#">Jquery</a>
+            <a class="p-2 text-dark" href="#">Vue Js</a>
+        </nav>
+        <a class="btn btn-outline-primary" target="_blank" href="https://www.youtube.com/channel/UCXFdc68srZQ-ok4I1-pHs2g?view_as=subscriber">Tahu Coding</a>
+    </div>
+
     <!-- MULAI CONTAINER -->
     <div class="container">
 
         <div class="card">
-            <div class="card-header bg-dark">
-                <h4 class="text-center text-light">DATA PEGAWAI</h4>
-            </div>
+            
             <div class="card-body">
                 <!-- MULAI TOMBOL TAMBAH -->
                 <a href="javascript:void(0)" class="btn btn-info" id="tombol-tambah">Tambah PEGAWAI</a>
@@ -237,7 +235,7 @@
             });
         });
 
-        //SIMPAN DATA DAN VALIDASI (SISI CLIENT)
+        //SIMPAN & UPDATE DATA DAN VALIDASI (SISI CLIENT)
         //jika id = form-tambah-edit panjangnya lebih dari 0 atau bisa dibilang terdapat data dalam form tersebut maka
         //jalankan jquery validator terhadap setiap inputan dll dan eksekusi script ajax untuk simpan data
         if ($("#form-tambah-edit").length > 0) {
