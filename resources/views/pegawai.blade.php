@@ -32,8 +32,8 @@
     <div class="container">
 
         <div class="card">
-            <div class="card-header bg-light">
-                <h3 class="text-center">DATA PEGAWAI</h3>
+            <div class="card-header bg-dark">
+                <h4 class="text-center text-light">DATA PEGAWAI</h4>
             </div>
             <div class="card-body">
                 <!-- MULAI TOMBOL TAMBAH -->
