@@ -17,7 +17,13 @@ class PegawaiController extends Controller
         if($request->ajax()){            
             if(!empty($request->from_date))
             {
-                $list_pegawai = Pegawai::whereBetween('created_at', array($request->dari_tanggal, $request->hingga_tanggal))->get();
+                if($request->from_date === $request->to_date){
+                    $list_pegawai = Pegawai::whereDate('created_at','=', $request->from_date)->get();
+                }
+                else{
+                    $list_pegawai = Pegawai::whereBetween('created_at', array($request->from_date, $request->to_date))->get();
+                }
+                
             }
             else
             {

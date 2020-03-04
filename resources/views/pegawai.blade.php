@@ -34,12 +34,9 @@
 
     <!-- MULAI CONTAINER -->
     <div class="container">
-
-        <div class="card">
-
-
-
+        <div class="card">            
             <div class="card-body">
+                <!-- MULAI DATE RANGE PICKER -->
                 <div class="row input-daterange">
                     <div class="col-md-4">
                         <input type="text" name="from_date" id="from_date" class="form-control" placeholder="From Date"
@@ -54,6 +51,7 @@
                         <button type="button" name="refresh" id="refresh" class="btn btn-default">Refresh</button>
                     </div>
                 </div>
+                <!-- AKHIR DATE RANGE PICKER -->
                 <br>
                 <!-- MULAI TOMBOL TAMBAH -->
                 <a href="javascript:void(0)" class="btn btn-info" id="tombol-tambah">Tambah PEGAWAI</a>
@@ -67,8 +65,8 @@
                             <th>JK</th>
                             <th>Email</th>
                             <th>Alamat</th>
-                            <th>Tanggal (Created_at)</th>
-                            <th>Aksi</th>
+                            <th  width="15%">Created_at</th>
+                            <th width="15%">Aksi</th>
                         </tr>
                     </thead>
                 </table>
