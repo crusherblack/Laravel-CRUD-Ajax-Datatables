@@ -9,4 +9,5 @@ class Pegawai extends Model
     protected $table = "pegawai";
 
     protected $guarded = [];
+    
 }

@@ -12,6 +12,9 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/css/iziToast.css"
         integrity="sha256-pODNVtK3uOhL8FUNWWvFQK0QoQoV3YA9wGGng6mbZ0E=" crossorigin="anonymous" />
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/css/bootstrap-datepicker.css" />
     <!-- AKHIR STYLE CSS -->
 
 </head>
@@ -25,15 +28,33 @@
             <a class="p-2 text-dark" href="#">Jquery</a>
             <a class="p-2 text-dark" href="#">Vue Js</a>
         </nav>
-        <a class="btn btn-outline-primary" target="_blank" href="https://www.youtube.com/channel/UCXFdc68srZQ-ok4I1-pHs2g?view_as=subscriber">Tahu Coding</a>
+        <a class="btn btn-outline-primary" target="_blank"
+            href="https://www.youtube.com/channel/UCXFdc68srZQ-ok4I1-pHs2g?view_as=subscriber">Tahu Coding</a>
     </div>
 
     <!-- MULAI CONTAINER -->
     <div class="container">
 
         <div class="card">
-            
+
+
+
             <div class="card-body">
+                <div class="row input-daterange">
+                    <div class="col-md-4">
+                        <input type="text" name="from_date" id="from_date" class="form-control" placeholder="From Date"
+                            readonly />
+                    </div>
+                    <div class="col-md-4">
+                        <input type="text" name="to_date" id="to_date" class="form-control" placeholder="To Date"
+                            readonly />
+                    </div>
+                    <div class="col-md-4">
+                        <button type="button" name="filter" id="filter" class="btn btn-primary">Filter</button>
+                        <button type="button" name="refresh" id="refresh" class="btn btn-default">Refresh</button>
+                    </div>
+                </div>
+                <br>
                 <!-- MULAI TOMBOL TAMBAH -->
                 <a href="javascript:void(0)" class="btn btn-info" id="tombol-tambah">Tambah PEGAWAI</a>
                 <br><br>
@@ -46,6 +67,7 @@
                             <th>JK</th>
                             <th>Email</th>
                             <th>Alamat</th>
+                            <th>Tanggal (Created_at)</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -172,6 +194,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/js/iziToast.js"
         integrity="sha256-siqh9650JHbYFKyZeTEAhq+3jvkFCG8Iz+MHdr9eKrw=" crossorigin="anonymous"></script>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/js/bootstrap-datepicker.js"></script>
+
 
     <!-- AKHIR LIBARARY JS -->
 
@@ -185,6 +209,78 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
+
+            //jalankan function load_data diawal agar data ter-load
+            load_data();
+
+            //Iniliasi datepicker pada class input
+            $('.input-daterange').datepicker({
+                todayBtn: 'linked',
+                format: 'yyyy-mm-dd',
+                autoclose: true
+            });
+
+            $('#filter').click(function () {
+                var from_date = $('#from_date').val();
+                var to_date = $('#to_date').val();
+                if (from_date != '' && to_date != '') {
+                    $('#table_pegawai').DataTable().destroy();
+                    load_data(from_date, to_date);
+                } else {
+                    alert('Both Date is required');
+                }
+            });
+
+            $('#refresh').click(function () {
+                $('#from_date').val('');
+                $('#to_date').val('');
+                $('#table_pegawai').DataTable().destroy();
+                load_data();
+            });
+
+            //LOAD DATATABLE
+            //script untuk memanggil data json dari server dan menampilkannya berupa datatable
+            //load data menggunakan parameter tanggal dari dan tanggal hingga
+            function load_data(from_date = '', to_date = '') {
+                $('#table_pegawai').DataTable({
+                    processing: true,
+                    serverSide: true, //aktifkan server-side 
+                    ajax: {
+                        url: "{{ route('pegawai.index') }}",
+                        type: 'GET',
+                        data:{from_date:from_date, to_date:to_date} //jangan lupa kirim parameter tanggal 
+                    },
+                    columns: [{
+                            data: 'nama_pegawai',
+                            name: 'nama_pegawai'
+                        },
+                        {
+                            data: 'jenis_kelamin',
+                            name: 'jenis_kelamin'
+                        },
+                        {
+                            data: 'email',
+                            name: 'email'
+                        },
+                        {
+                            data: 'alamat',
+                            name: 'alamat'
+                        },
+                        {
+                            data: 'created_at',
+                            name: 'created_at'
+                        },
+                        {
+                            data: 'action',
+                            name: 'action'
+                        },
+
+                    ],
+                    order: [
+                        [0, 'asc']
+                    ]
+                });
+            }
         });
 
         //TOMBOL TAMBAH DATA
@@ -196,44 +292,7 @@
             $('#modal-judul').html("Tambah Pegawai Baru"); //valuenya tambah pegawai baru
             $('#tambah-edit-modal').modal('show'); //modal tampil
         });
-
-        //MULAI DATATABLE
-        //script untuk memanggil data json dari server dan menampilkannya berupa datatable
-        $(document).ready(function () {
-            $('#table_pegawai').DataTable({
-                processing: true,
-                serverSide: true, //aktifkan server-side 
-                ajax: {
-                    url: "{{ route('pegawai.index') }}",
-                    type: 'GET'
-                },
-                columns: [{
-                        data: 'nama_pegawai',
-                        name: 'nama_pegawai'
-                    },
-                    {
-                        data: 'jenis_kelamin',
-                        name: 'jenis_kelamin'
-                    },
-                    {
-                        data: 'email',
-                        name: 'email'
-                    },
-                    {
-                        data: 'alamat',
-                        name: 'alamat'
-                    },
-                    {
-                        data: 'action',
-                        name: 'action'
-                    },
-
-                ],
-                order: [
-                    [0, 'asc']
-                ]
-            });
-        });
+     
 
         //SIMPAN & UPDATE DATA DAN VALIDASI (SISI CLIENT)
         //jika id = form-tambah-edit panjangnya lebih dari 0 atau bisa dibilang terdapat data dalam form tersebut maka
