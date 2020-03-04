@@ -192,6 +192,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/js/iziToast.js"
         integrity="sha256-siqh9650JHbYFKyZeTEAhq+3jvkFCG8Iz+MHdr9eKrw=" crossorigin="anonymous"></script>
 
+    <!-- MULAI DATEPICKER JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/js/bootstrap-datepicker.js"></script>
 
 
@@ -219,8 +220,8 @@
             });
 
             $('#filter').click(function () {
-                var from_date = $('#from_date').val();
-                var to_date = $('#to_date').val();
+                var from_date = $('#from_date').val(); 
+                var to_date = $('#to_date').val(); 
                 if (from_date != '' && to_date != '') {
                     $('#table_pegawai').DataTable().destroy();
                     load_data(from_date, to_date);
