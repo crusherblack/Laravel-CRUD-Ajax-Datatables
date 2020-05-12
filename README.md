@@ -7,3 +7,5 @@ Ketikkan:
 3. php artisan key:generate
 4. php artisan migrate (Jangan lupa set up database)
 5. php artisan db:seed
+
+Other tutorial https://www.youtube.com/channel/UCXFdc68srZQ-ok4I1-pHs2g?view_as=subscriber
